@@ -1,0 +1,30 @@
+\mode<presentation>
+\RequirePackage{xcolor}
+
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  \fill[color=darkblue] (0,0) rectangle (\the\paperwidth,\the\paperheight);
+	\node[inner sep=0pt] (logo) at (1.95,1.1)
+    {\includegraphics[width=.19\textwidth]{logo}};
+  % \fill[color=orange] (12,0.8) rectangle(14.95,1.6);
+	\draw[white] (11.8,0.6) -- (11.8,1.3);
+		\node[anchor=east,white] at (11.7, 0.95){\usebeamerfont{date}\insertdate};
+		\node[anchor=west,white, align=left] at (11.9, 0.95){\usebeamerfont{author}\insertauthor};
+	% Main page
+  \ifnum\thepage>1\relax%
+   \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+   \fi
+  \end{tikzpicture}
+}
+
+\defbeamertemplate*{title page}{au}[1][]
+{ 
+   \vskip3cm%
+    \begin{beamercolorbox}[wd=14cm,leftskip=2cm,sep=8pt,#1]{title page header}
+      \usebeamerfont{title}\inserttitle\par%
+    \end{beamercolorbox}%
+  \vfill
+}
+
+\mode<all>

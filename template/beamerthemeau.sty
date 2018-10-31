@@ -1,0 +1,25 @@
+\mode<presentation>
+
+\RequirePackage{tikz}
+\RequirePackage{fontspec}
+\newfontfamily{\aufont}[Extension=.ttf,Path=fonts/]{AUPassata_Rg.ttf} %,BoldFont=AUPassata_Bold,ItalicFont=AUPassata_Light
+
+\usecolortheme{au}
+\useinnertheme{au}
+\useoutertheme{au}
+
+\setbeamertemplate{navigation symbols}
+
+\setbeamerfont{frametitle}{series=\aufont}
+\setbeamerfont{framesubtitle}{series=\aufont}
+\setbeamerfont{title}{series=\aufont, size=\Huge}
+\setbeamerfont{caption}{series=\aufont}
+\setbeamerfont{author}{series=\aufont, size=\footnotesize}
+\setbeamerfont{institute}{series=\aufont}
+\setbeamerfont{date}{series=\aufont, size=\footnotesize}
+\setbeamerfont{normal text}{series=\aufont}
+
+\AtBeginDocument{\usebeamerfont{normal text}}
+% \setbeamertemplate{blocks}[rounded][shadow=false]
+
+\mode<all>

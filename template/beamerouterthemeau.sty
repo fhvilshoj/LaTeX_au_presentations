@@ -1,0 +1,23 @@
+\mode<presentation>
+
+% Frame title
+\defbeamertemplate*{frametitle}{au}[1][]
+{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.8cm]{frametitle} 
+  \begin{tikzpicture}
+  \useasboundingbox[fill=white](0,0) rectangle(\the\paperwidth,1.2);
+  \fill[white] (0,0.7) rectangle(\the\paperwidth,1.2);
+  \fill[darkblue] (1,0) rectangle(1.9,0.16);
+   \ifx\insertframesubtitle\@empty%
+			{\node[anchor= west, darkblue,font=\large] at (0.4,0.91){\usebeamerfont{frametitle}\insertframetitle};}
+      \else%
+			{\node[anchor= west, darkblue,font=\large] at (0.4,0.91){\usebeamerfont{frametitle}\insertframetitle};%
+			 \node[anchor= west, darkblue,font=\small] at (0.4,0.44){\usebeamerfont{framesubtitle}\insertframesubtitle};}%
+      \fi
+
+		\node[anchor=west, darkblue, font=\footnotesize] at (1.8,0.08) {\insertframenumber  / \inserttotalframenumber};
+  \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+\mode<all>
