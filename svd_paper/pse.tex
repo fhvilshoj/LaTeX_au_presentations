@@ -2,10 +2,21 @@
 	Improving Explanations with Probabilistic Saliency Estimation
 \end{frame}
 
-\begin{frame}{Probabilistic Saliency Estimation}
+\begin{frame}{Probabilistic Saliency Estimation~\cite{pse}}
+	\begin{center}
+		\scalebox{0.55}{
+			\input{cats_and_dogs}
+		}
+	\end{center}
+	
+	Let $A \in \R^{h \times w \times c}$ be an attribution map,
+	then we propose a refined attribution 
 
+	$$
+		\hat A = A \odot P
+	$$
 \end{frame}
 
-\begin{frame}{Area Under Perturbation Score}
-
+\begin{frame}{Experiment}
+	\includegraphics[width=\textwidth]{PSE_example.png}
 \end{frame}
