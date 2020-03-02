@@ -1,0 +1,14 @@
+\begin{frame}[standout]
+	Generating Counterfactual Explanations
+\end{frame}
+
+
+\begin{frame}{Construction}
+	$$
+	f(x) = \sigma \left ( \beta^T NN(x) \right)
+	$$
+
+	$$
+	f^\dagger(y) = NN^{-1}\left( f(x) - \frac{f(x)^T \beta}{||\beta||}\right)
+	$$
+\end{frame}

@@ -1,0 +1,11 @@
+digraph unix {
+    size="6,6";
+    node [fillcolor="#002546", color="#FFFFFF", fontcolor="#FFFFFF", style="rounded, filled", shape=record];
+    // Explainability [fillcolor="#ECECEC", style=rounded, shape=record];
+    // "Invertible NN" [fillcolor="#ECECEC", style="rounded"];
+    // Combined [fillcolor="#ECECEC", style="rounded"];
+
+    Explainability -> Combined;
+    "Invertible NN" -> Combined;
+	
+}

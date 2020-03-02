@@ -1,0 +1,77 @@
+\usepackage{xcolor}
+\definecolor{darkblue}{RGB}{0,37,70}
+\definecolor{darkred}{RGB}{70,0,38}
+\definecolor{darkorange}{RGB}{231,129,0}
+\definecolor{darkbrown}{RGB}{108,60,0}
+\definecolor{darkgreen}{RGB}{5,130,0}
+
+\usetheme[numbering=fraction,progressbar=head,background=light,block=fill]{metropolis}
+
+\usepackage{etoolbox}
+
+\setbeamercolor{block title}{use=structure,fg=structure.fg,bg=structure.fg!20!bg}
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!50!bg}
+
+\setbeamercolor{block title example}{use=example text,fg=example text.fg,bg=example text.fg!20!bg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!50!bg}
+
+\BeforeBeginEnvironment{theorem}{
+    \setbeamercolor{block title}{fg=normal text.fg,bg=structure.fg!10!bg}
+    \setbeamercolor{block body}{fg=normal text.fg, bg=white!97!black}
+}
+\AfterEndEnvironment{theorem}{
+ \setbeamercolor{block title}{use=structure,fg=structure.fg,bg=structure.fg!20!bg}
+ \setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!50!bg, fg=normal text.fg}
+}
+
+\setbeamercolor{normal text}{%
+	fg=darkblue,
+	bg=white
+}
+
+\setbeamercolor{title page text}{
+	fg=white,
+	bg=transparent}
+
+\usepackage{pgfpages}
+
+\usepackage[numbers,square,sort&compress]{natbib}
+\usepackage[american]{babel}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+% \usepackage{booktabs}
+\usepackage{algorithmic}
+
+% Definitions
+\newcommand{\myparallel}{\textcolor{darkbrown}{parallel}}
+\newcommand{\mysequential}{\textcolor{darkgreen}{sequential}}
+
+\newcommand{\obj}{\mathcal{O}}
+\newcommand{\kl}{D_{KL}}
+\newcommand{\proxy}{\mathcal{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\orth}{\mathcal{O}}
+\newcommand{\I}{\mathbb{1}}
+% \newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\lrelu}{\text{LeakyReLU}}
+\newcommand{\bias}{\text{Bias}}
+\newcommand{\cnn}{\text{CNN}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\conv}{\text{conv}_{3d}}
+\newcommand{\convtwo}{\text{conv}_{2d}}
+\newcommand{\dft}{\text{DFT}_{3d}} % default is 3, add 2 also. 
+\newcommand{\idft}{\text{DFT}^{-1}_{3d}}
+\newcommand{\channels}{\text{\# channels}}
+\DeclareMathOperator*{\argmax}{\arg{}\,\max}
+\DeclareMathOperator*{\argmin}{\arg{}\,\min}
+% end definitions
+
+% \setbeameroption{show notes on second screen}
+% \makeatletter
+% \def\beamer@framenotesbegin{% at beginning of slide
+% \usebeamercolor[fg]{normal text}
+% \gdef\beamer@noteitems{}%
+% \gdef\beamer@notes{}%
+% }
+% \makeatother

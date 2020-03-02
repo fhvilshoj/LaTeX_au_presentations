@@ -1,0 +1,44 @@
+\documentclass[10pt,aspectratio=169]{beamer}
+\input{macros}
+
+\title{Fast, Effective and Interpretable Deep Learning}
+
+\date{\today}
+\author{Frederik Hvilshøj}
+% \institute{Aarhus University, Department of Computer Science}
+\titlegraphic{\vspace{4.3cm}\hspace{9.8cm}\includegraphics[width=0.5\textwidth]{logo.png}}
+
+\begin{document}
+
+\maketitle
+
+% TOC
+\begin{frame}{Table of contents}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Introuction}
+\input{introduction}
+
+\section{Normalizing Flows}
+\input{normalizing-flows}
+
+\section{Explainability}
+\input{explainability}
+
+
+\appendix
+\begin{frame}[t, allowframebreaks]{References}
+	\bibliographystyle{plainnat} 
+	\begingroup
+	\renewcommand{\section}[2]{}%
+	\footnotesize
+	\bibliography{references}
+	\endgroup
+
+	% \bibliography{references}
+\end{frame}
+
+\end{document}
+

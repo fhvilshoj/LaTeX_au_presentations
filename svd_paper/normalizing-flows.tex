@@ -1,0 +1,63 @@
+\begin{frame}{Normalizing Flows}
+ 	\alert{Goal:} Learn a representation of a density $p(x)$ directly.
+
+	\alert{Model:} Maximize log-likelihood of the data with respect to the parameters of an invertible Neural Network.
+
+	$$
+		\log( p_\theta(x) ) = \log( p_z(f(x)) ) + \log( det |\frac{\partial f(x)}{\partial x}| )
+	$$
+
+	\alert{Constraints:} invertible $f(x)$ and tractable Jacobian.
+
+
+	$$
+		log\left( \det | \frac{\partial f_1(f_2(\dots f_k(x)))}{\partial x} | \right) = \sum_{i=1}^k \log \left( \det | \frac{\partial f_i(z_{i-1})}{\partial z_{i-1}} | \right)
+	$$
+
+	$$
+		z_1 = x, \quad z_i = f_{i-1}(z_{i-1})
+	$$
+\end{frame}
+
+\begin{frame}{Normalizing Flow Layers}
+	\begin{description}
+		\item[Coupling layer] $c(x) = (x_1, x_2 + m(x_1))$, for $x = (x_1, x_2)$~\cite{nice}
+		\item[Channel permutation] Fixed channel permutations of 3D data~\cite{realnvp}
+		\item[1x1 convolutions] Each spacial fiber multiplied by invertible matrix~\cite{glow}
+		\item[Periodic convolutions] Circular convolutions over each channel~\cite{emerging}
+	\end{description}
+\end{frame}
+
+\input{svd-slides}
+
+\input{conv-slides}
+
+\begin{frame}[standout]
+	Improving Variational Auto-Encoders
+\end{frame}
+
+\begin{frame}{Improving Variational Auto-Encoders}
+	Variational lower-bound:
+	$$
+		\log p(x) \geq \E_{z \sim q(z | x)}\left[ \log p(x | z) \right] + D_{KL}(q(z|x) || p(z))
+	$$
+
+	where $q(z|x) = \mathcal{N}(\mu(x), diag(\sigma(x)))$.
+
+	With formalizing flow $f$, the equation becomes
+
+	$$
+	\log p(x) \geq  \E_{z\sim p(z|x)}\left[ \log p(x|f(z)) + \log |Det\frac{\partial f(z)}{\partial z}|\right] + D_{KL}\left(q(z|x) || p(f(z))\right)
+	$$
+
+	\cite{houseVAE} let $f(z) = H_kH_{k-1}\cdots H_1z$ with each $H_i$ being parametrized by the encoder.
+	
+\end{frame}
+
+\begin{frame}{Improving Variational Auto-Encoders}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.4\textwidth]{houseVAE}
+		\caption{Comparison of the lower bound of marginal log-likelihood measured in nats of the digits in the MNIST test set. For the first three methods the experiment was repeated 3 times. \alert{Direct copy from \cite{houseVAE}.}}
+	\end{figure}
+\end{frame}
