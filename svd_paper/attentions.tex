@@ -2,15 +2,64 @@
 	Attention Mechanisms in Gradient Explanations
 \end{frame}
 
-\begin{frame}{Explanations Relies on Gradients}
-	% Generalization
-	% Guided Back Prop as example
+\begin{frame}{Guiding backward computations}
+	A simple dense layer $f_\ell: L' \rightarrow L$ of a Neural Network 
+	with backpropagation function $g_\ell: L \rightarrow L'$ of explanation $a_\ell$ is
+	\begin{center}
+	\begin{tabular}{cc}
+		$
+			f_\ell(h_{\ell-1}) = \sigma (h_{\ell-1}^T W_\ell)\qquad \qquad
+		$ & 
+		$
+			g_\ell(a_\ell) = a_\ell^T \frac{\partial \sigma(h_{\ell-1}W_\ell)}{\partial h_{\ell-1}w_\ell} W^T
+		$ 
+	\end{tabular}
+	\end{center}
+	with $W \in \R^{L' \times  L}$.
+	We experimented with guiding the backpropagation
+	\begin{align*}
+		\hat a_{\ell-1} &= g_\ell(a_\ell) \odot \alpha_\ell(h_{\ell-1}, a_{\ell}) \\ 
+    	\alpha_\ell(h_{\ell-1}, a_\ell) &= \tanh \left( [h_{\ell-1} || a_\ell] L_\ell R_\ell \right)
+	\end{align*}
+	with $L_\ell\in \R^{(L'+L) \times d}$ and $R_\ell \in \R^{d \times L'}$, for $d < \frac{L\cdot L'}{L+L'}$
+
+	\alert{Extensions:}
+	\begin{itemize}
+		\item Change the input to the $\alpha_\ell$s
+		\item Scale the output to be in range $[-c, c]$
+	\end{itemize}
 \end{frame} 
 
+\begin{frame}{Learning $L$ and $R$}
+	\begin{itemize}
+		\item Need to definde a loss
+		\item DeconvNet and Guided Backprop are class insensitive
+	\end{itemize}
 
+	\begin{equation*}
+ 	 	 L(X, \hat X) = ||\hat X||_1 + \lambda \mathcal{L}(y, \hat y),
+	\end{equation*}
 
+	\alert{Extensions:}
+	\begin{equation*}
+		L(X, \hat X) = \mathcal{L}(y, \hat y) + \lambda_1 ||\hat X||_1 + \lambda_2 ||X - \hat X||_2 + \lambda_3 vec(\hat X)^T \rL vec(\hat X)
+	\end{equation*}
 
+	\begin{equation*}
+		f^T \rL f = \frac{1}{2}\sum_{i=1}^d \sum_{j=1}^d a_{i,j} (f_i - f_j)^2
+	\end{equation*}
 
-\begin{frame}{Issues}
+\end{frame}
+
+\begin{frame}{Challenges}
 	% Loss for attribution functions?
+	\begin{itemize}
+		\item Currently only potentially works with DeconvNet, GBP, and PatternNet
+		\item Loss for attribution methods?
+		\item Are these explanations from the in-sample-distribution?
+	\end{itemize}
+
+	$$
+		\mathrm{AOPC}=\frac{1}{L+1}\left\langle\sum_{k=0}^{L} f\left(x_{\mathrm{MoRF}}^{(0)}\right)-f\left(x_{\mathrm{MoRF}}^{(k)}\right)\right\rangle_{p(x)}
+	$$
 \end{frame}

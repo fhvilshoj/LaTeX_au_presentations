@@ -9,10 +9,7 @@
 		$\Sigma$ is an $m \times n$ rectangular diagonal matrix, and $V$ is an $n \times
 		n$ \alert{orthogonal} matrix.
 	\end{definition}
-\end{frame}
-
-\begin{frame}{Properties of the SVD}
-	For out purposes, assume that $W$ is a square, i.e., $W \in \R^{d\times d}$.
+	For our purposes, assume that $W$ is a square, i.e., $W \in \R^{d\times d}$.
 	Then:
 	\begin{align*}
 		U^{-1} &= U^T\text{ and }V^{-1} = V^T  \quad \quad & O(d^2)\\
@@ -21,6 +18,9 @@
 	\end{align*}
 	Other fast computations are largest singular value, condition number, matrix exponential, and Cayley Map.
 \end{frame}
+
+% \begin{frame}{Properties of the SVD}
+% \end{frame}
 
 \begin{frame}{Use in Neural Networks}
 	% Titles
@@ -70,22 +70,8 @@
 
 	\begin{itemize}
 		\item Note LHS of Eqn. (\ref{eq:hh}) takes $O(d^2)$ but RHS takes $O(d)$.
-		\item $H$ stays orthogonal under gradient descent on $v$!
+		\item $H$ stays orthogonal under gradient descent on $v$
 	\end{itemize}
-
-	\begin{lemma}
-		The product of two orthogonal matrices is orthogonal. 
-	\end{lemma}
-\end{frame}
-
-\begin{frame}{Main Idea}
-	Parametrize $U$ and $V$ as a product of Householder matrices \cite{orthhh}.
-	
-	$$
-		U = H_1 \cdot H_2 \cdots H_{d}
-	$$
-
-	When evaluating a NN, we need to compute
 
 	$$
 		UX = H_1 ( H_2 ( \cdots (H_{d} X)))
@@ -93,11 +79,31 @@
 
 	with $X \in \R^{d \times m}$, where $m$ is the batch size.
 
-	If we represent $H_i$s as matrices, this takes $O(d^3m)$ time (denoted \myparallel~\cite{orthhh}).
-	We can easily improve by representnig $H_i$ by its vectors
-	$v_i$ instead, $O(d^2m)$ (denoted \mysequential~\cite{orthhh}).
-	%$v_i$ instead, $O(d^2m)$ (denoted \emph{sequential}).
+	If we represent $H_i$s as matrices, this takes $O(d^3m)$ time (\myparallel~\cite{orthhh}).
+
+	We can easily improve by representnig $H_i$ by its vectors $v_i$ instead, $O(d^2m)$ (\mysequential~\cite{orthhh}).
 \end{frame}
+
+% \begin{frame}{Main Idea}
+	% Parametrize $U$ and $V$ as a product of Householder matrices \cite{orthhh}.
+	% 
+	% $$
+		% U = H_1 \cdot H_2 \cdots H_{d}
+	% $$
+
+	% When evaluating a NN, we need to compute
+
+	% $$
+		% UX = H_1 ( H_2 ( \cdots (H_{d} X)))
+	% $$
+% 
+	% with $X \in \R^{d \times m}$, where $m$ is the batch size.
+% 
+	% If we represent $H_i$s as matrices, this takes $O(d^3m)$ time (denoted \myparallel~\cite{orthhh}).
+	% We can easily improve by representnig $H_i$ by its vectors
+	% $v_i$ instead, $O(d^2m)$ (denoted \mysequential~\cite{orthhh}).
+	%$v_i$ instead, $O(d^2m)$ (denoted \emph{sequential}).
+% \end{frame}
 
 \begin{frame}{Issues}
 	
@@ -133,7 +139,7 @@
 		\textbf{Time:} 
 		$$P_1 \cdot P_2 \cdots P_{\frac{d}{m}} X \qquad O(d^3m) \Rightarrow O(d^2m) $$
 		\textbf{\# sequential opetations:} 
-		$$O(\text{compute }I-2WY^T + \text{multiply }P_i\text{s}) = O(d/m + m)$$
+		$$O({\color{darkred}\text{compute }I-2WY^T} + {\color{darkorange}\text{multiply }X\text{ with }P_i\text{s}}) = O({\color{darkred}m} + {\color{darkorange}d/m})$$
 
 \end{frame}
 
